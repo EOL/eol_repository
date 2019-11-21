@@ -1,6 +1,6 @@
-package collections;
+package org.bibalex.eol.collections;
 
-public class Agents {
+public class Agent {
 
     private String agentId;
     private String firstName;

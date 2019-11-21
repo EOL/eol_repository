@@ -1,4 +1,4 @@
-package collections;
+package org.bibalex.eol.collections;
 
 public class Reference {
 

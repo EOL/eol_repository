@@ -1,4 +1,4 @@
-package collections;
+package org.bibalex.eol.collections;
 
 import java.util.HashMap;
 

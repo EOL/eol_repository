@@ -1,28 +1,32 @@
-package collections;
+package org.bibalex.eol.collections;
 
 import java.util.List;
+import org.springframework.data.annotation.*;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-
+@Document
 public class Node {
 
     private String nodeId;
+    @Indexed
     private int resourceId;
     private String modifiedAt;
-    private int parentGNId;
-    private boolean preferred;
-    private int pageId;
+    private Integer parentGNId;
+    private Boolean preferred;
+    private Integer pageId;
     private String acceptedNameUsageId;
     private String rank;
-    private int generatedNodeId;
+    @Id private String generatedNodeId;
     private String canonicalName;
     private String scientificName;
     private String italicizedScientificName;
     private String taxonomicStatus;
-    private int landMark;
+    private Integer landMark;
     private String[] referenceIds;
     private String[] identifiers;
-    private boolean inUnMappedArea;
-    private boolean hasBreadCrumb;
+    private Boolean inUnMappedArea;
+    private Boolean hasBreadCrumb;
     private String sourceUrl;
     private String[] attributesFromGnParser;
     private String remarks;
@@ -35,15 +39,19 @@ public class Node {
         return nodeId;
     }
 
+    public String toString() {
+        return "Page: " + pageId + " -Sci:" + scientificName + " -res: " + resourceId;
+    }
+
     public void setNodeId(String nodeId) {
         this.nodeId = nodeId;
     }
 
-    public int getResourceId() {
+    public Integer getResourceId() {
         return resourceId;
     }
 
-    public void setResourceId(int resourceId) {
+    public void setResourceId(Integer resourceId) {
         this.resourceId = resourceId;
     }
 
@@ -55,27 +63,27 @@ public class Node {
         this.modifiedAt = modifiedAt;
     }
 
-    public int getParentGNId() {
+    public Integer getParentGNId() {
         return parentGNId;
     }
 
-    public void setParentGNId(int parentGNId) {
+    public void setParentGNId(Integer parentGNId) {
         this.parentGNId = parentGNId;
     }
 
-    public boolean isPreferred() {
+    public Boolean isPreferred() {
         return preferred;
     }
 
-    public void setPreferred(boolean preferred) {
+    public void setPreferred(Boolean preferred) {
         this.preferred = preferred;
     }
 
-    public int getPageId() {
+    public Integer getPageId() {
         return pageId;
     }
 
-    public void setPageId(int pageId) {
+    public void setPageId(Integer pageId) {
         this.pageId = pageId;
     }
 
@@ -95,11 +103,11 @@ public class Node {
         this.rank = rank;
     }
 
-    public int getGeneratedNodeId() {
+    public String getGeneratedNodeId() {
         return generatedNodeId;
     }
 
-    public void setGeneratedNodeId(int generatedNodeId) {
+    public void setGeneratedNodeId(String generatedNodeId) {
         this.generatedNodeId = generatedNodeId;
     }
 
@@ -135,11 +143,11 @@ public class Node {
         this.taxonomicStatus = taxonomicStatus;
     }
 
-    public int getLandMark() {
+    public Integer getLandMark() {
         return landMark;
     }
 
-    public void setLandMark(int landMark) {
+    public void setLandMark(Integer landMark) {
         this.landMark = landMark;
     }
 
@@ -159,19 +167,19 @@ public class Node {
         this.identifiers = identifiers;
     }
 
-    public boolean isInUnMappedArea() {
+    public Boolean isInUnMappedArea() {
         return inUnMappedArea;
     }
 
-    public void setInUnMappedArea(boolean inUnMappedArea) {
+    public void setInUnMappedArea(Boolean inUnMappedArea) {
         this.inUnMappedArea = inUnMappedArea;
     }
 
-    public boolean isHasBreadCrumb() {
+    public Boolean isHasBreadCrumb() {
         return hasBreadCrumb;
     }
 
-    public void setHasBreadCrumb(boolean hasBreadCrumb) {
+    public void setHasBreadCrumb(Boolean hasBreadCrumb) {
         this.hasBreadCrumb = hasBreadCrumb;
     }
 

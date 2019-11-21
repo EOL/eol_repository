@@ -1,23 +1,23 @@
-package collections;
+package org.bibalex.eol.collections;
 
 import java.util.List;
 import java.util.UUID;
 
-public class Medium {
+public class Article {
 
-    private String mediumId;
+    private String articleId;
     private int resourceId;
     private String modifiedAt;
     private String nodeId;
     private UUID guid;
-    private List<MediumVersion> versions;
-
-    public String getMediaId() {
-        return mediumId;
+    private List<ArticleVersion> versions;
+    // Still have to add agents and location under discussion
+    public String getArticleId() {
+        return articleId;
     }
 
-    public void setMediaId(String mediumId) {
-        this.mediumId = mediumId;
+    public void setArticleId(String articleId) {
+        this.articleId = articleId;
     }
 
     public int getResourceId() {
@@ -52,13 +52,11 @@ public class Medium {
         this.guid = guid;
     }
 
-    public List<MediumVersion> getVersions() {
+    public List<ArticleVersion> getVersions() {
         return versions;
     }
 
-    public void setVersions(List<MediumVersion> versions) {
+    public void setVersions(List<ArticleVersion> versions) {
         this.versions = versions;
     }
-
-    // Still have to add agents and location under discussion
 }

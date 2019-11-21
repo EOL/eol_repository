@@ -1,7 +1,7 @@
-package collections;
+package org.bibalex.eol.collections;
 
 public class Vernacular {
-
+ 
     private String name;
     private String source;
     private String language;
