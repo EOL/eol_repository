@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="eol_repository" />
+        <module name="repository" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="eol_repository" target="1.5" />
+      <module name="repository" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
