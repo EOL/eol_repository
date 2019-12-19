@@ -17,7 +17,7 @@ public class Node {
     private Integer pageId;
     private String acceptedNameUsageId;
     private String rank;
-    @Id private String generatedNodeId;
+    @Id private String _id;
     private String canonicalName;
     private String scientificName;
     private String italicizedScientificName;
@@ -103,12 +103,12 @@ public class Node {
         this.rank = rank;
     }
 
-    public String getGeneratedNodeId() {
-        return generatedNodeId;
+    public String get_id() {
+        return _id;
     }
 
-    public void setGeneratedNodeId(String generatedNodeId) {
-        this.generatedNodeId = generatedNodeId;
+    public void set_id(String _id) {
+        this._id = _id;
     }
 
     public String getCanonicalName() {

@@ -1,18 +1,18 @@
 package org.bibalex.eol.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SequenceWriter;
 import org.bibalex.eol.collections.Node;
 import org.bibalex.eol.repositories.NodeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
-import javax.swing.text.Document;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
+import java.io.*;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by maha.mostafa on 11/12/19.
@@ -35,16 +35,15 @@ public class NodeController {
 
     @RequestMapping(value= "/insertNodes", method = RequestMethod.POST, consumes = "application/json")
     public void insertNodes (@RequestBody List<Node> nodes) throws IOException {
-//        return  nodeRepo.insert(nodes);
         ObjectMapper mapper = new ObjectMapper();
+        File nodes_file = new File("nodes.json");
+        FileWriter fileWriter = new FileWriter(nodes_file, true);
+        mapper.writeValue(nodes_file, nodes);
 
-        // Java object to JSON file
-        for (Node node: nodes) {
-            mapper.writeValue(new File("nodes.json"), node);
-        }
-
-
-
+        ProcessBuilder pb = new ProcessBuilder("/home/ba/eol_repository/nodes.sh", "test", "node", "nodes.json");
+        File errorFile = new File("PingErrLog.txt");
+        pb.redirectError(errorFile);
+        pb.start();
     }
 
     @RequestMapping(value="/findNodesByResource/{resourceId}", method = RequestMethod.GET)
@@ -53,6 +52,28 @@ public class NodeController {
         return nodeRepo.findByresourceId(resourceId);
 
     }
+
+    @RequestMapping(value="/countScientific", method = RequestMethod.GET)
+    public Long countScientificNames()
+    {
+        return nodeRepo.count();
+
+    }
+
+    @RequestMapping(value="/findNodesByResourceAndNode/{resourceId}/{nodeId}", method = RequestMethod.GET)
+    public List<Node> findByResourceAndNode(@PathVariable("resourceId") int resourceId, @PathVariable("nodeId") String nodeId)
+    {
+        return nodeRepo.findByResourceIdAndNodeId(resourceId, nodeId);
+    }
+
+    // Nodes are taxa which are not synonms
+    @RequestMapping(value="/countNodes", method = RequestMethod.GET)
+    public Long countNodes()
+    {
+        return nodeRepo.countByAcceptedNameUsageId(null);
+    }
+
+
 
 
 

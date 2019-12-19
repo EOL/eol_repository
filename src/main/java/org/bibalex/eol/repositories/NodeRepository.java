@@ -8,5 +8,11 @@ import java.util.List;
 public interface NodeRepository extends MongoRepository<Node, String> {
 
     List<Node> findByresourceId(int resourceId);
-    //List<Node> findByresourceIdAndnodeId(int resourceId, String nodeId);
+    //Integer countBygeneratedNodeId();
+    List<Node> findByResourceIdAndNodeId(int resourceId, String nodeId);
+    Long countByAcceptedNameUsageId(String acceptedNameUsageId);
+
+
+
+
 }
