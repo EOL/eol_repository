@@ -2,8 +2,11 @@ package org.bibalex.eol.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SequenceWriter;
+import com.sun.xml.internal.bind.v2.TODO;
 import org.bibalex.eol.collections.Node;
-import org.bibalex.eol.repositories.NodeRepository;
+import org.bibalex.eol.collections.Vernacular;
+
+import org.bibalex.eol.services.NodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,60 +24,63 @@ import java.util.Map;
 @RequestMapping("/nodes")
 public class NodeController {
     @Autowired
-    private NodeRepository nodeRepo;
+    private NodeService nodeServ;
 
+    //TODO: get using timestamp
     @RequestMapping(value = "/getAllNodes", method = RequestMethod.GET)
     public List<Node> getAllNodes() {
-        return nodeRepo.findAll();
+        return nodeServ.getAllNodes();
     }
 
     @RequestMapping(value = "/createNode", method = RequestMethod.POST, consumes = "application/json")
-    public Node createNode(@RequestBody Node node) {
-        return nodeRepo.save(node);
+    public Node createNode(@RequestBody Node node)
+    {
+        return nodeServ.createNode(node);
     }
 
     @RequestMapping(value= "/insertNodes", method = RequestMethod.POST, consumes = "application/json")
-    public void insertNodes (@RequestBody List<Node> nodes) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        File nodes_file = new File("nodes.json");
-        FileWriter fileWriter = new FileWriter(nodes_file, true);
-        mapper.writeValue(nodes_file, nodes);
+    public void insertNodes (@RequestBody List<Node> nodes) throws IOException
+    {
+        //TODO: security issues (authentication)
+        nodeServ.insertNodes(nodes);
 
-        ProcessBuilder pb = new ProcessBuilder("/home/ba/eol_repository/nodes.sh", "test", "node", "nodes.json");
-        File errorFile = new File("PingErrLog.txt");
-        pb.redirectError(errorFile);
-        pb.start();
     }
 
-    @RequestMapping(value="/findNodesByResource/{resourceId}", method = RequestMethod.GET)
-    public List<Node> findNodesByResource(@PathVariable("resourceId") int resourceId)
+    @RequestMapping(value="/getByResource/{resourceId}", method = RequestMethod.GET)
+    public List<Node> getByResourceId(@PathVariable("resourceId") int resourceId)
     {
-        return nodeRepo.findByresourceId(resourceId);
+        return nodeServ.getByResourceId(resourceId);
 
     }
 
     @RequestMapping(value="/countScientific", method = RequestMethod.GET)
-    public Long countScientificNames()
+    public long countScientificNames()
     {
-        return nodeRepo.count();
+        return nodeServ.countScientificNames();
 
     }
-
+//
     @RequestMapping(value="/findNodesByResourceAndNode/{resourceId}/{nodeId}", method = RequestMethod.GET)
-    public List<Node> findByResourceAndNode(@PathVariable("resourceId") int resourceId, @PathVariable("nodeId") String nodeId)
+    public Node findByResourceAndNode(@PathVariable("resourceId") int resourceId, @PathVariable("nodeId") String nodeId)
     {
-        return nodeRepo.findByResourceIdAndNodeId(resourceId, nodeId);
+        return nodeServ.findByResourceAndNode(resourceId, nodeId);
     }
 
     // Nodes are taxa which are not synonms
     @RequestMapping(value="/countNodes", method = RequestMethod.GET)
-    public Long countNodes()
+    public long countNodes()
     {
-        return nodeRepo.countByAcceptedNameUsageId(null);
+        return nodeServ.countNodes();
+    }
+
+    @RequestMapping(value="/countVernaculars", method = RequestMethod.GET )
+    public String countVernaculars()
+    {
+        return nodeServ.countVernaculars();
     }
 
 
-
+    //TODO: reharvest
 
 
 

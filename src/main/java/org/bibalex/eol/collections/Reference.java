@@ -6,7 +6,7 @@ public class Reference {
     private int resourceId;
     private String modifiedAt;
 
-
+  //todo remaining attributes
     public int getResourceId() {
         return resourceId;
     }

@@ -1,6 +1,7 @@
 package org.bibalex.eol.collections;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class MediumVersion {
 
@@ -33,6 +34,7 @@ public class MediumVersion {
     private String sourcePageUrl;
     private String usageStatement;
     private HashMap<String,String> imageInfo;
+    private List<Agent> agents;
 
     public String getModifiedAt() {
         return modifiedAt;
@@ -265,5 +267,13 @@ public class MediumVersion {
 
     public void setOwner(String owner) {
         this.owner = owner;
+    }
+
+    public List<Agent> getAgents() {
+        return agents;
+    }
+
+    public void setAgents(List<Agent> agents) {
+        this.agents = agents;
     }
 }

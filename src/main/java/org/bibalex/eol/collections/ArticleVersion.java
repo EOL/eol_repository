@@ -1,6 +1,8 @@
 package org.bibalex.eol.collections;
 
 
+import java.util.List;
+
 public class ArticleVersion {
 
     private String modifiedAt;
@@ -25,6 +27,7 @@ public class ArticleVersion {
     private String[] referenceIds;
     private String sourceUrl;
     private String contentSection;
+    private List<Agent> agents;
 
     public String getModifiedAt() {
         return modifiedAt;
@@ -200,5 +203,13 @@ public class ArticleVersion {
 
     public void setContentSection(String contentSection) {
         this.contentSection = contentSection;
+    }
+
+    public List<Agent> getAgents() {
+        return agents;
+    }
+
+    public void setAgents(List<Agent> agents) {
+        this.agents = agents;
     }
 }
