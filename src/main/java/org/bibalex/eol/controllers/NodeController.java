@@ -38,7 +38,7 @@ public class NodeController {
         return nodeServ.createNode(node);
     }
 
-    @RequestMapping(value= "/insertNodes", method = RequestMethod.POST, consumes = "application/json")
+    @RequestMapping(value= "/insert", method = RequestMethod.POST, consumes = "application/json")
     public void insertNodes (@RequestBody List<Node> nodes) throws IOException
     {
         //TODO: security issues (authentication)
@@ -60,10 +60,10 @@ public class NodeController {
 
     }
 //
-    @RequestMapping(value="/findNodesByResourceAndNode/{resourceId}/{nodeId}", method = RequestMethod.GET)
+    @RequestMapping(value="/getByResourceAndPk/{resourceId}/{nodeId}", method = RequestMethod.GET)
     public Node findByResourceAndNode(@PathVariable("resourceId") int resourceId, @PathVariable("nodeId") String nodeId)
     {
-        return nodeServ.findByResourceAndNode(resourceId, nodeId);
+        return nodeServ.getByResourceAndPk(resourceId, nodeId);
     }
 
     // Nodes are taxa which are not synonms

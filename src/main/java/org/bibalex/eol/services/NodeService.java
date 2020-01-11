@@ -54,7 +54,7 @@ public class NodeService {
 
     }
 
-    public Node findByResourceAndNode( int resourceId, String nodeId)
+    public Node getByResourceAndPk( int resourceId, String nodeId)
     {
         return nodeRepo.findByResourceIdAndNodeId(resourceId, nodeId);
     }
