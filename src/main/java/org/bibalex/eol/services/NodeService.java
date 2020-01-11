@@ -36,7 +36,7 @@ public class NodeService {
         mapper.writeValue(nodes_file, nodes);
         // check coming json array if its size + the size of the existing file will exceed the linit (16MB)
         // then mongo import first then write the coming records. otherwise simple write in file.
-        ProcessBuilder pb = new ProcessBuilder("/home/ba/eol_repository/nodes.sh", "test", "node", "nodes.json");
+        ProcessBuilder pb = new ProcessBuilder("/home/ba/eol_repository/nodesInsertion.sh", "test", "node", "nodes.json");
         File errorFile = new File("PingErrLog.txt");
         pb.redirectError(errorFile);
         pb.start();
