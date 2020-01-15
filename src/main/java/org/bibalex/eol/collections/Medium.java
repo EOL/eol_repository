@@ -12,6 +12,7 @@ public class Medium {
     private UUID guid;
     private List<MediumVersion> versions;
 
+    //todo : specify primary key
     public String getMediaId() {
         return mediumId;
     }

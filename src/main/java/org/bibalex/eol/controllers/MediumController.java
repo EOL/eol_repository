@@ -32,14 +32,14 @@ public class MediumController {
            return mediumServ.getByResourceAndPk(resourceId, mediumId);
     }
 
-    @RequestMapping(value="/insertMedia", method = RequestMethod.POST)
+    @RequestMapping(value="/insert", method = RequestMethod.POST, consumes = "application/json" )
     public void insertMedia(List<Medium> media)
     {
           //TODO
            mediumServ.insertMedia(media);
     }
 
-    @RequestMapping(value="count", method = RequestMethod.GET)
+    @RequestMapping(value="/count", method = RequestMethod.GET)
     public long countMedia()
     {
        return mediumServ.countMedia();
