@@ -1,6 +1,9 @@
 package org.bibalex.eol.collections;
 
+import java.util.Date;
 import java.util.List;
+
+import org.joda.time.DateTime;
 import org.springframework.data.annotation.*;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -11,7 +14,8 @@ public class Node {
     private String nodeId;
     @Indexed
     private int resourceId;
-    private String modifiedAt;
+    @LastModifiedDate
+    private Date modifiedAt;
     private Integer parentGNId;
     private Boolean preferred;
     private Integer pageId;
@@ -55,11 +59,11 @@ public class Node {
         this.resourceId = resourceId;
     }
 
-    public String getModifiedAt() {
+    public Date getModifiedAt() {
         return modifiedAt;
     }
 
-    public void setModifiedAt(String modifiedAt) {
+    public void setModifiedAt(Date modifiedAt) {
         this.modifiedAt = modifiedAt;
     }
 

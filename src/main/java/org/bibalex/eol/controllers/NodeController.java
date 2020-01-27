@@ -1,21 +1,16 @@
 package org.bibalex.eol.controllers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SequenceWriter;
-import com.sun.xml.internal.bind.v2.TODO;
+
 import org.bibalex.eol.collections.Node;
-import org.bibalex.eol.collections.Vernacular;
 
 import org.bibalex.eol.services.NodeService;
+import org.joda.time.format.ISODateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.aggregation.DateOperators;
 import org.springframework.web.bind.annotation.*;
-
-
 import java.io.*;
-import java.lang.reflect.Array;
-import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by maha.mostafa on 11/12/19.
@@ -25,11 +20,18 @@ import java.util.Map;
 public class NodeController {
     @Autowired
     private NodeService nodeServ;
+//    ISODateTimeFormat.ofPattern("yyyy-MM-dd'T'HHss.SSS")
 
     //TODO: get using timestamp
     @RequestMapping(value = "/getAllNodes", method = RequestMethod.GET)
     public List<Node> getAllNodes() {
         return nodeServ.getAllNodes();
+    }
+
+    @RequestMapping(value="getByTimestamps/{from}/{to}", method = RequestMethod.GET)
+    public List<Node> getByTimestamps(@PathVariable ("from") String from , @PathVariable ("to") String to)
+    {
+        return nodeServ.getByTimestamps(new Date(from).toISOString(), DateOperators.DateToString.dateOf(to));
     }
 
     @RequestMapping(value = "/createNode", method = RequestMethod.POST, consumes = "application/json")

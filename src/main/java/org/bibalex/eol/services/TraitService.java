@@ -1,17 +1,17 @@
 package org.bibalex.eol.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.bibalex.eol.collections.Node;
 import org.bibalex.eol.collections.Trait;
-import org.bibalex.eol.repositories.NodeRepository;
 import org.bibalex.eol.repositories.TraitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
+@Service
 public class TraitService {
 
     @Autowired

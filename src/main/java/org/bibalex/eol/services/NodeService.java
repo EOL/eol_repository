@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -67,6 +68,11 @@ public class NodeService {
     public String countVernaculars()
     {
         return nodeRepo.countVernaculars();
+    }
+
+    public  List<Node> getByTimestamps(Date from, Date to)
+    {
+        return nodeRepo.findByModifiedAtBetween(from,to);
     }
 
 }
