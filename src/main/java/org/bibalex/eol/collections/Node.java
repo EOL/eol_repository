@@ -1,5 +1,6 @@
 package org.bibalex.eol.collections;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class Node {
     @Indexed
     private int resourceId;
     @LastModifiedDate
-    private Date modifiedAt;
+    private Instant modifiedAt;
     private Integer parentGNId;
     private Boolean preferred;
     private Integer pageId;
@@ -59,11 +60,11 @@ public class Node {
         this.resourceId = resourceId;
     }
 
-    public Date getModifiedAt() {
+    public Instant getModifiedAt() {
         return modifiedAt;
     }
 
-    public void setModifiedAt(Date modifiedAt) {
+    public void setModifiedAt(Instant modifiedAt) {
         this.modifiedAt = modifiedAt;
     }
 

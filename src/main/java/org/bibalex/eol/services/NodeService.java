@@ -6,11 +6,10 @@ import org.bibalex.eol.collections.Node;
 import org.bibalex.eol.repositories.NodeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Date;
+import java.time.Instant;
 import java.util.List;
 
 @Service
@@ -70,7 +69,7 @@ public class NodeService {
         return nodeRepo.countVernaculars();
     }
 
-    public  List<Node> getByTimestamps(Date from, Date to)
+    public  List<Node> getByTimestamps(Instant from, Instant to)
     {
         return nodeRepo.findByModifiedAtBetween(from,to);
     }

@@ -4,12 +4,10 @@ package org.bibalex.eol.controllers;
 import org.bibalex.eol.collections.Node;
 
 import org.bibalex.eol.services.NodeService;
-import org.joda.time.format.ISODateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.aggregation.DateOperators;
 import org.springframework.web.bind.annotation.*;
 import java.io.*;
-import java.util.Date;
+import java.time.Instant;
 import java.util.List;
 
 /**
@@ -20,7 +18,6 @@ import java.util.List;
 public class NodeController {
     @Autowired
     private NodeService nodeServ;
-//    ISODateTimeFormat.ofPattern("yyyy-MM-dd'T'HHss.SSS")
 
     //TODO: get using timestamp
     @RequestMapping(value = "/getAllNodes", method = RequestMethod.GET)
@@ -28,10 +25,11 @@ public class NodeController {
         return nodeServ.getAllNodes();
     }
 
-    @RequestMapping(value="getByTimestamps/{from}/{to}", method = RequestMethod.GET)
-    public List<Node> getByTimestamps(@PathVariable ("from") String from , @PathVariable ("to") String to)
+    @RequestMapping(value="getByTimestamps", method = RequestMethod.POST)
+    public List<Node> getByTimestamps(@RequestParam ("from") String from , @RequestParam ("to") String to)
     {
-        return nodeServ.getByTimestamps(new Date(from).toISOString(), DateOperators.DateToString.dateOf(to));
+        return nodeServ.getByTimestamps(Instant.parse(from),
+                Instant.parse(to));
     }
 
     @RequestMapping(value = "/createNode", method = RequestMethod.POST, consumes = "application/json")
